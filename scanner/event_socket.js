@@ -15,7 +15,7 @@ const eventInterface = new ethers.utils.Interface(events);
 websocket.on("open", () => {
   console.log("WebSocket connection established");
   const subscriptions = [];
-  // Build the subscription request for the NewListing event
+  // Build the subscription request for the events from abi
   for (let event of events) {
     // const eventSignature = getEventSignature(event);
 
@@ -36,7 +36,7 @@ websocket.on("open", () => {
     });
   }
   for (let subscription of subscriptions) {
-    // Send the subscription requests
+    // Send the subscription requests for each event signature
     websocket.send(JSON.stringify(subscription));
   }
 });
