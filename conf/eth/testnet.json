@@ -2,7 +2,7 @@
     "blockchain": "11155111",
     "START_BLOCK": 30111809,
     "BLOCK_RANGE": 1000,
-    "NODE": "",
+    "NODE": "https://rpc2.sepolia.org",
     "CONTRACT_ADDRESS": "0x4FE615CFe0c2B6d1a77c298AEE279a2459A8F6fe",
     "NFT_ADDRESS": "0xB0e8c6eE916249426107b5d410882b2cb5d650DD",
     "ABI": [
