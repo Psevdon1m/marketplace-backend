@@ -1,5 +1,5 @@
 # Backend For Marketplace Project
-
+Backend for the nft-marketplace https://github.com/Psevdon1m/nft-marketplace
 This backend project consists of the following files and directories:
 
 - `api/api.js`: This file contains the server code that runs the backend API. It listens on port 3000 and handles incoming HTTP requests. You can modify this file to add or modify API endpoints and their corresponding logic.
