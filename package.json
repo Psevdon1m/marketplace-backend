@@ -5,10 +5,18 @@
   "main": "index.js",
   "scripts": {
     "api": "bash -c 'source .env && node api/api.js'",
-    "poly_testnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
-    "bsc_testnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'",
-    "poly_mainnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
-    "bsc_mainnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'"
+    "poly_testnet_https": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
+    "bsc_testnet_https": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'",
+    "poly_mainnet_https": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
+    "bsc_mainnet_https": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'",
+    "poly_testnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/poly/testnet.json'",
+    "bsc_testnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/bsc/testnet.json'",
+    "eth_testnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/eth/testnet.json'",
+    "poly_mainnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/poly/testnet.json'",
+    "bsc_mainnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/bsc/testnet.json'",
+    "eth_mainnet_wss": "bash -c 'source .env && node scanner/event_socket.js ../conf/eth/testnet.json'"
+    
+    
   },
   "keywords": [],
   "author": "",
@@ -23,6 +31,7 @@
     "lodash": "^4.17.21",
     "log4js": "^6.9.1",
     "mysql2": "^3.2.4",
-    "routes": "^2.1.0"
-}
+    "routes": "^2.1.0",
+    "ws": "^8.13.0"
+  }
 }

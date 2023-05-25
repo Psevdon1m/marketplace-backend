@@ -1,22 +1,27 @@
 const config = require(process.argv[2]);
+const ethers = require("ethers");
 const { getEventSignature } = require("../utils/helper");
 const WebSocket = require("ws");
 
 // Configure the WebSocket connection
-const websocketUrl = config.NODE;
+const websocketUrl = process.env.NODE;
 const websocket = new WebSocket(websocketUrl);
 
 // Specify the contract address
 const contractAddress = config.CONTRACT_ADDRESS;
 const events = config.ABI;
-
+const eventInterface = new ethers.utils.Interface(events);
 // Handle WebSocket connection established
 websocket.on("open", () => {
   console.log("WebSocket connection established");
   const subscriptions = [];
   // Build the subscription request for the NewListing event
   for (let event of events) {
-    const eventSignature = getEventSignature(event);
+    // const eventSignature = getEventSignature(event);
+
+    const eventTopic = eventInterface.getEventTopic(event.name);
+    const eventSignatureHex = ethers.utils.hexDataSlice(eventTopic, 0, 32);
+    console.log("Signature: ", eventSignatureHex);
     subscriptions.push({
       jsonrpc: "2.0",
       id: 1,
@@ -25,7 +30,7 @@ websocket.on("open", () => {
         "logs",
         {
           address: contractAddress,
-          topics: ["0x" + Buffer.from(eventSignature).toString("hex")],
+          topics: [eventSignatureHex],
         },
       ],
     });
@@ -47,25 +52,25 @@ websocket.on("message", (data) => {
     message.params.result
   ) {
     const eventData = message.params.result;
-    console.log("Received event:", eventData);
 
     // Parse the event data
     const eventTopic = eventData.topics[0];
     const eventArgs = eventData.data;
 
+    const eventResult = eventInterface.parseLog({
+      data: eventArgs,
+      topics: eventData.topics,
+    });
+
     // Check the event topic and handle accordingly
     if (
-      eventTopic ===
-      "0x" +
-        Buffer.from("NewListing(address,uint256,address,uint256)").toString(
-          "hex"
-        )
+      eventResult.signature === "NewListing(address,uint256,address,uint256)"
     ) {
       // NewListing event
-      const seller = "0x" + eventArgs.slice(24, 64);
-      const price = parseInt("0x" + eventArgs.slice(64, 128));
-      const nftAddress = "0x" + eventArgs.slice(128, 168);
-      const tokenId = parseInt("0x" + eventArgs.slice(168));
+      const seller = "0x" + eventResult.args[0];
+      const price = ethers.utils.formatEther(eventResult.args[1]);
+      const nftAddress = eventResult.args[2];
+      const tokenId = parseInt(eventResult.args[3]);
 
       console.log("New Listing:");
       console.log("Seller:", seller);
@@ -75,17 +80,13 @@ websocket.on("message", (data) => {
 
       // TODO: Handle the NewListing event data
     } else if (
-      eventTopic ===
-      "0x" +
-        Buffer.from("ItemBought(address,address,uint256,uint256)").toString(
-          "hex"
-        )
+      eventResult.signature === "ItemBought(address,address,uint256,uint256)"
     ) {
       // ItemBought event
-      const buyer = "0x" + eventArgs.slice(24, 64);
-      const nftAddress = "0x" + eventArgs.slice(64, 104);
-      const tokenId = parseInt("0x" + eventArgs.slice(104, 168));
-      const price = parseInt("0x" + eventArgs.slice(168));
+      const buyer = eventResult.args[0];
+      const nftAddress = eventResult.args[1];
+      const tokenId = parseInt(eventResult.args[2]);
+      const price = ethers.utils.formatEther(eventResult.args[3]);
 
       console.log("Item Bought:");
       console.log("Buyer:", buyer);

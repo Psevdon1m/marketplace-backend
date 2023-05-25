@@ -2,7 +2,7 @@
     "blockchain": "56",
     "START_BLOCK": 1,
     "BLOCK_RANGE": 1000,
-    "NODE": "",
+    "NODE": "wss://dex.binance.org/api/ws",
     "CONTRACT_ADDRESS": "",
     "ABI": []
 }

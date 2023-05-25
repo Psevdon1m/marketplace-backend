@@ -1,10 +1,10 @@
 {
-    "blockchain": "97",
+    "blockchain": "11155111",
     "START_BLOCK": 30111809,
     "BLOCK_RANGE": 1000,
-    "NODE": "wss://testnet-dex.binance.org/api/ws",
-    "CONTRACT_ADDRESS": "0x225217b383E5e1085eb176db5782DB31A242FD48",
-    "NFT_ADDRESS": "0x488e07E78b01e41C8cA5491579a34429E1B74d83",
+    "NODE": "",
+    "CONTRACT_ADDRESS": "0x4FE615CFe0c2B6d1a77c298AEE279a2459A8F6fe",
+    "NFT_ADDRESS": "0xB0e8c6eE916249426107b5d410882b2cb5d650DD",
     "ABI": [
         {
             "anonymous": false,

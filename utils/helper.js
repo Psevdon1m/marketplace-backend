@@ -1,9 +1,8 @@
+const ethers = require("ethers");
 const getEventSignature = (event) => {
-  let signature = "";
-  if (event.type === "event") {
-    const inputs = event.inputs.map((input) => input.type);
-    signature = `${event.name}(${inputs.join(",")})`;
-  }
+  const interface = new ethers.utils.Interface([event]);
+  event = interface.getEvent(event.name);
+  const signature = event.format();
   console.log({ eventName: event.name, signature });
   return signature;
 };
