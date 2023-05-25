@@ -1,0 +1,8 @@
+{
+    "blockchain": "137",
+    "START_BLOCK": 1,
+    "BLOCK_RANGE": 1000,
+    "NODE": "",
+    "CONTRACT_ADDRESS": "",
+    "ABI": []
+}

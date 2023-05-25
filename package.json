@@ -1,0 +1,16 @@
+{
+  "name": "marketplace-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "api": "bash -c 'source .env && node api/api.js'",
+    "poly_testnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
+    "bsc_testnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'",
+    "poly_mainnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/poly/testnet.json'",
+    "bsc_mainnet": "bash -c 'source .env && node scanner/event_scanner.js ../conf/bsc/testnet.json'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
